@@ -5,21 +5,23 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
     public Rigidbody rb;
-
-	// Use this for initialization
-	void Start ()
-    {
-        Debug.Log("LA");
-    }
-	
-	// Update is called once per frame
-	void Update ()
-    {
-        Debug.Log("LA UPDATE");
-    }
+    public float forwardForce = 2000f;
+    public float sidewaysForce = 500f;
 
     private void FixedUpdate()
     {
-        rb.AddForce(new Vector3(0, 0, 2000)*Time.deltaTime);
+        // Add forwardforce
+        //rb.velocity = transform.forward * forwardForce * Time.deltaTime;
+        rb.AddForce(new Vector3(0, 0, forwardForce) *Time.deltaTime);
+
+        //
+        if (Input.GetKey(KeyCode.D))
+        {
+            rb.AddForce(sidewaysForce * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
+        }
+        else if (Input.GetKey(KeyCode.A))
+        {
+            rb.AddForce(-sidewaysForce * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
+        }
     }
 }
