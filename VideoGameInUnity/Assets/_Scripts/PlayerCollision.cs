@@ -11,6 +11,7 @@ public class PlayerCollision : MonoBehaviour {
         if(collision.collider.tag == "Obstacle")
         {
             P_controller.enabled = false;
+            FindObjectOfType<Game_manager>().EndGame();
         }
     }
 }
